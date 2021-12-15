@@ -18,7 +18,11 @@ public class SimpleServlet extends HttpServlet {
         processRequest(req, resp);
     }
 
-    protected void processRequest(HttpServletRequest req, HttpServletResponse resp){
+    protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("First app");
+
+        String response = "<h1>Hello world</h1>";
+
+        resp.getWriter().write(response);
     }
 }
