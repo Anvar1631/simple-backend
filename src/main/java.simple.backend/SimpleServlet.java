@@ -1,3 +1,5 @@
+import com.google.gson.JsonObject;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +23,18 @@ public class SimpleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("First app");
 
-        String response = "<h1>Hello world</h1>";
+        resp
+                .getWriter()
+                .write(getResponseAsJson());
+    }
 
-        resp.getWriter().write(response);
+    protected String getResponseAsJson(){
+        var jsonObject = new JsonObject();
+
+        for (var i=0; i<10; i++){
+            jsonObject.addProperty("key-"+i, "value " + i);
+        }
+
+        return jsonObject.toString();
     }
 }
